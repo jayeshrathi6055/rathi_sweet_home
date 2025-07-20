@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/index.js"></script>
+    <title>Employee Transaction Details</title>
+</head>
+
+<body>
+    <header>
+        <nav class="w-80">
+            <h1>Rathi Sweet Home</h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/holiday">Holiday</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="w-80 employeeList section-alignment inner-width-100">
+        <h3 class="h3-font-size">List of Employees</h3>
+        <table class="table-basic-style">
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>
+                    <button>Add</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <section class="w-80 section-alignment inner-width-100">
+        <h3 class="h3-font-size">Recent Transactions</h3>
+        <table class="table-basic-style">
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td>Hema</td>
+                <td>100</td>
+            </tr>
+            </tr>
+            <tr>
+                <td>Mangilal</td>
+                <td>500</td>
+            </tr>
+            </tr>
+            <tr>
+                <td>Hema</td>
+                <td>200</td>
+            </tr>
+        </table>
+    </section>
+
+</body>
+
+</html>
