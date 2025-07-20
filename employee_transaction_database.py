@@ -10,5 +10,4 @@ class EmployeeTransactionDatabase:
     def fetch_users(self, filter_args=None):
         if filter_args is None:
             filter_args = {}
-        # Returns a list of users
         return list(self.__user_collection.find(filter_args))

@@ -6,8 +6,11 @@ employee_transaction_database = EmployeeTransactionDatabase(app)
 
 @app.route('/')
 def home():
-    users = employee_transaction_database.fetch_users()
-    return render_template("index.html", users=users)
+    return render_template("index.html")
+
+@app.route('/employeeManagement')
+def employee_management():
+    return render_template("employee_management/employee_management_dashboard.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
