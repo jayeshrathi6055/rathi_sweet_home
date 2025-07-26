@@ -67,3 +67,6 @@ header nav ul li a{
 .w-80 {
     width: 80%;
 }
+.m-tb-2rem {
+    margin: 2rem auto;
+}
