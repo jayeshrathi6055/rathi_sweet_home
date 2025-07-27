@@ -9,15 +9,24 @@
     place-items: center;
     grid-template-columns: auto auto auto;
     gap: 2rem;
-    border: 1px solid pink;
 }
-.employee-management-main > section > h3 {
+.employee-management-main > section a {
+    width:  100%;
+    text-decoration: none;
+}
+#current-employee-information::after {
+    content: 'Current Employee Information';
+    position: relative;
+    display: block;
+    bottom: 4rem;
+    left: 0;
+    color: black;
     width: 100%;
-    height: 20rem;
-    display: grid;
-    place-items: center;
-    border: 1px solid purple;
-}
-.employee-management-main > section > h3 > a {
+    height: 3rem;
     font-size: 2rem;
+    text-align: center;
+}
+.employee-management-main > section a img {
+    width:  100%;
+    height: 30rem;
 }
