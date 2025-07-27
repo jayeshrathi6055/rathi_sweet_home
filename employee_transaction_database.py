@@ -1,6 +1,8 @@
+from bson import ObjectId
 from flask_pymongo import PyMongo
 from dataclasses import asdict
 from models import UserType
+from datetime import datetime
 
 class EmployeeTransactionDatabase:
 
@@ -15,5 +17,18 @@ class EmployeeTransactionDatabase:
         return tuple(self.__user_collection.find(filter_args).sort("created_at", -1))
 
     def save_employee(self, employee):
-        saved_employee = self.__user_collection.insert_one(asdict(employee))
+        employee = asdict(employee)
+        employee['created_at'] = datetime.now()
+        employee.pop("_id")
+        saved_employee = self.__user_collection.insert_one(employee)
         return saved_employee
+
+    def update_employee(self, employee):
+        employee = asdict(employee)
+        employee_id = employee.pop("_id")
+        return self.__user_collection.update_one({"_id": ObjectId(employee_id)}, {"$set": employee})
+
+    def delete_employee(self, employee):
+        employee = asdict(employee)
+        employee.pop("_id")
+        return self.__user_collection.delete_one(employee)

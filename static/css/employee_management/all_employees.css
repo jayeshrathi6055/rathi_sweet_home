@@ -11,7 +11,13 @@
 .all-employees > .heading > h2 {
     font-size: 2.5rem;
 }
-.all-employees > .heading > button {
+.all-employees > .heading > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 22%;
+}
+.all-employees > .heading > div button {
     font-size: 2rem;
     padding: 0.5rem 1.5rem;
     color: white;
@@ -19,9 +25,11 @@
     border: none;
     border-radius: 0.2rem;
 }
-.all-employees > .heading > button:hover {
+.all-employees > .heading > div > .dangerButton {
+    background: red;
+}
+.all-employees > .heading > div button:hover {
     cursor: pointer;
-    background-color: #3A7734;
     border: 1px solid black;
 }
 
@@ -42,7 +50,7 @@
     font-size:  1.5rem;
 }
 
-.save-employee {
+.all-employees-form {
     position: absolute;
     top: 0;
     left: 0;
@@ -53,7 +61,7 @@
     display: none;
     place-items: center;
 }
-.save-employee > button {
+.all-employees-form > button {
     position:  absolute;
     top: 2rem;
     right: 2rem;
@@ -63,11 +71,11 @@
     border: none;
     font-size:  2rem;
 }
-.save-employee > button:hover {
+.all-employees-form > button:hover {
     border: 1px solid black;
     cursor: pointer;
 }
-#save-employee-form {
+#save-employee-form, #modify-delete-employee-form {
     width: 30%;
     height: 80%;
     display: flex;
@@ -75,14 +83,15 @@
     background-color: white;
     padding: 2rem;
 }
-#save-employee-form label {
+#save-employee-form label, #modify-delete-employee-form label {
     font-size: 2rem;
+    padding:  0.5rem 0;
 }
-#save-employee-form input {
+#save-employee-form input, #modify-delete-employee-form input,select {
     font-size: 1.8rem;
-    padding: 0.5rem 0 1rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
 }
-#save-employee-form button {
+#save-employee-form button, #modify-delete-employee-form button {
     font-size: 2rem;
     padding: 0.5rem 0rem;
     color: white;
@@ -90,8 +99,16 @@
     border: none;
     border-radius: 0.2rem;
 }
-#save-employee-form button:hover {
+#save-employee-form button:hover, #modify-delete-employee-form button:hover {
     cursor: pointer;
     background-color: #3A7734;
     border: 1px solid black;
+}
+#modify-delete-employee-form > div button {
+    padding: 1rem 2rem;
+    background-color: red;
+}
+#modify-delete-employee-form > div button:hover {
+    padding: 1rem 2rem;
+    background-color: rgb(186, 4, 4);
 }

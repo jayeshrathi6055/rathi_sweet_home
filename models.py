@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date
 from enum import Enum
+from bson import ObjectId
 
 
 class UserType(str, Enum):
@@ -9,6 +10,7 @@ class UserType(str, Enum):
 
 @dataclass
 class Employee:
+    _id: ObjectId = None
     name: str = None
     age: int = None
     street_address: str = None
@@ -17,4 +19,3 @@ class Employee:
     date_of_birth: date = None
     salary: int = None
     type: str = UserType.EMPLOYEE
-    created_at: datetime = datetime.now()
