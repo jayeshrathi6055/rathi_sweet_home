@@ -1,8 +1,7 @@
 from bson import ObjectId
 from flask_pymongo import PyMongo
 from dataclasses import asdict
-from models import UserType
-from datetime import datetime
+from models import UserType, Employee, EmployeeMapper
 
 class EmployeeTransactionDatabase:
 
@@ -16,19 +15,13 @@ class EmployeeTransactionDatabase:
             filter_args = {"type": UserType.EMPLOYEE}
         return tuple(self.__user_collection.find(filter_args).sort("created_at", -1))
 
-    def save_employee(self, employee):
-        employee = asdict(employee)
-        employee['created_at'] = datetime.now()
-        employee.pop("_id")
-        saved_employee = self.__user_collection.insert_one(employee)
-        return saved_employee
+    def save_employee(self, employee:Employee):
+        return self.__user_collection.insert_one(EmployeeMapper.for_save_dict(employee))
 
-    def update_employee(self, employee):
-        employee = asdict(employee)
-        employee_id = employee.pop("_id")
-        return self.__user_collection.update_one({"_id": ObjectId(employee_id)}, {"$set": employee})
+    def update_employee(self, employee:Employee):
+        employee_dict = EmployeeMapper.for_update_dict(employee)
+        employee_id = employee_dict.pop("_id")
+        return self.__user_collection.update_one({"_id": employee_id}, {"$set": employee_dict})
 
-    def delete_employee(self, employee):
-        employee = asdict(employee)
-        employee.pop("_id")
-        return self.__user_collection.delete_one(employee)
+    def delete_employee(self, employee:Employee):
+        return self.__user_collection.delete_one(EmployeeMapper.for_delete_dict(employee))

@@ -28,7 +28,7 @@ def action_employee():
         employee = Employee(**data)
         employee_transaction_database.save_employee(employee)
     elif request.form.get("_method") == 'DELETE':
-        data['name'] = data['name'].split("_")[1]
+        data['_id'], data['name'] = data['name'].split("_")
         employee = Employee(**data)
         employee_transaction_database.delete_employee(employee)
     elif request.form.get("_method") == 'PUT':
