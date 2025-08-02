@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block title %}Rathi Sweet Home - Employee Management - All Employees{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/employee_management/save_transactions.css')}}">
+{% endblock %}
+{% block content %}
+<main class="w-80 m-tb-2rem">
+    <div id="heading">
+        <h2>Save Transactions</h2>
+    </div>
+    <form action="" method="POST">
+        <label for="user-name-id">User Name</label>
+        <select name="user_id" id="user-name-id">
+            {% for employee in employees %}
+            <option value="{{ employee._id }}">{{ employee.name }}-{{ employee._id }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="amount">Enter Amount</label>
+        <input type="text" name="amount" id="amount" required>
+
+        <button type="submit">Save</button>
+    </form>
+
+</main>
+<script src="{{url_for('static',filename = 'js/employee_management/save_transactions.js')}}"></script>
+{% endblock %}

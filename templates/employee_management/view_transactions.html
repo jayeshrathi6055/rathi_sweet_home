@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% block title %}Rathi Sweet Home - Employee Management - All Employees{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/employee_management/view_transactions.css')}}">
+{% endblock %}
+{% block content %}
+<main class="w-80 m-tb-2rem">
+    <div id="heading">
+        <h2>View Transactions</h2>
+    </div>
+    <div id="filter">
+        <a href="?transactions_limit=7">Last 7 Transactions</a>
+        <a href="?transactions_limit=30">Last 30 Transactions</a>
+        {% for user in users %}
+        <a href="?user_id={{ user._id }}&transactions_limit=30">For {{ user.name }}</a>
+        {% endfor %}
+    </div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>User Name</th>
+            <th>Amount</th>
+            <th>Transaction Date</th>
+        </tr>
+        {% for transaction in user_transactions %}
+        <tr>
+            <td>{{ transaction._id }}</td>
+            <td>{{ transaction.user_name }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

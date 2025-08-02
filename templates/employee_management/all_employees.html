@@ -1,11 +1,11 @@
 {% extends "index.html" %}
 {% block title %}Rathi Sweet Home - Employee Management - All Employees{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="../static/css/employee_management/all_employees.css">
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/employee_management/all_employees.css')}}">
 <script id="employee-data" type="application/json">
     {{ employees | tojson }}
 </script>
-<script src="../static/js/employee_management/all_employees.js"></script>
+<script src="{{url_for('static',filename = 'js/employee_management/all_employees.js')}}"></script>
 {% endblock %}
 {% block content %}
 <main class="w-80 m-tb-2rem">

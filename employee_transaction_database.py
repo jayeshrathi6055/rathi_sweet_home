@@ -1,7 +1,8 @@
 from bson import ObjectId
 from flask_pymongo import PyMongo
 from dataclasses import asdict
-from models import UserType, Employee, EmployeeMapper
+from models import *
+from mappers import *
 
 class EmployeeTransactionDatabase:
 
@@ -9,6 +10,7 @@ class EmployeeTransactionDatabase:
         self.__mongo = PyMongo(flask_app, uri="mongodb://localhost:27017/employee_transaction_detail")
         self.__db = self.__mongo.db
         self.__user_collection = self.__db['User']
+        self.__transaction_collection = self.__db['Transaction']
 
     def fetch_employee(self, filter_args=None):
         if filter_args is None:
@@ -25,3 +27,21 @@ class EmployeeTransactionDatabase:
 
     def delete_employee(self, employee:Employee):
         return self.__user_collection.delete_one(EmployeeMapper.for_delete_dict(employee))
+
+    def fetch_user_transactions(self, **kwargs):
+        filter_args = {}
+        limit = int(kwargs.get('transactions_limit', 0))
+        user_id = kwargs.get('user_id')
+        if not limit:
+            limit = 7
+        if user_id:
+            filter_args["user_id"] = ObjectId(user_id)
+        all_transactions = tuple(self.__transaction_collection.find(filter_args).sort("created_at", -1).limit(limit))
+        user_transactions = []
+        for i in all_transactions:
+            i['user_name'] = self.__user_collection.find_one({"_id": ObjectId(i['user_id'])})['name']
+            user_transactions.append(i)
+        return user_transactions
+
+    def save_transaction(self, employee_transaction:EmployeeTransaction):
+        return self.__transaction_collection.insert_one(EmployeeTransactionMapper.for_save_dict(employee_transaction))
