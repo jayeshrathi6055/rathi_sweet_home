@@ -1,7 +1,4 @@
-from bson import ObjectId
 from flask_pymongo import PyMongo
-from dataclasses import asdict
-from models import *
 from mappers import *
 
 class EmployeeTransactionDatabase:
@@ -15,7 +12,8 @@ class EmployeeTransactionDatabase:
     def fetch_employee(self, filter_args=None):
         if filter_args is None:
             filter_args = {"type": UserType.EMPLOYEE}
-        return tuple(self.__user_collection.find(filter_args).sort("created_at", -1))
+        employees = self.__user_collection.find(filter_args).sort("created_at", -1)
+        return tuple({**emp, "_id": str(emp["_id"])} for emp in employees)
 
     def save_employee(self, employee:Employee):
         return self.__user_collection.insert_one(EmployeeMapper.for_save_dict(employee))

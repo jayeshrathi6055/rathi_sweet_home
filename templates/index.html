@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>{% block title %}Rathi Sweet Home{% endblock %}</title>
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_icon_font_css() }}
     {% block head %}
     <script src="{{url_for('static',filename = 'js/index.js')}}"></script>
     {% endblock %}
@@ -27,7 +29,7 @@
         </section>
     </main>
     {% endblock %}
-
+    {{ bootstrap.load_js() }}
 </body>
 
 </html>

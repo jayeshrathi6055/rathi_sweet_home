@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
+from flask_bootstrap import Bootstrap5
 from employee_transaction_database import EmployeeTransactionDatabase
 from models import *
 from datetime import datetime
 
 app = Flask(__name__)
+bootstrap = Bootstrap5(app)
 employee_transaction_database = EmployeeTransactionDatabase(app)
 
 @app.route('/')

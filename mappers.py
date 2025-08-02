@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from models import *
 
 class EmployeeMapper:
