@@ -1,55 +1,3 @@
-.all-employees {
-    display: grid;
-    grid-template-columns: auto;
-}
-.all-employees > .heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.5rem;
-}
-.all-employees > .heading > h2 {
-    font-size: 2.5rem;
-}
-.all-employees > .heading > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 22%;
-}
-.all-employees > .heading > div button {
-    font-size: 2rem;
-    padding: 0.5rem 1.5rem;
-    color: white;
-    background: green;
-    border: none;
-    border-radius: 0.2rem;
-}
-.all-employees > .heading > div > .dangerButton {
-    background: red;
-}
-.all-employees > .heading > div button:hover {
-    cursor: pointer;
-    border: 1px solid black;
-}
-
-.all-employees > .employees > table {
-    width: 100%;
-}
-.all-employees > .employees > table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-.all-employees > .employees > table tr th {
-    font-size: 1.5rem;
-    padding: 1rem 0;
-    background-color: green;
-    color: white;
-}
-.all-employees > .employees > table tr td {
-    text-align: center;
-    font-size:  1.5rem;
-}
-
 .all-employees-form {
     position: absolute;
     top: 0;
@@ -65,15 +13,6 @@
     position:  absolute;
     top: 2rem;
     right: 2rem;
-    padding: 0.5rem;
-    color: white;
-    background: red;
-    border: none;
-    font-size:  2rem;
-}
-.all-employees-form > button:hover {
-    border: 1px solid black;
-    cursor: pointer;
 }
 #save-employee-form, #modify-delete-employee-form {
     width: 30%;
@@ -82,33 +21,4 @@
     flex-direction: column;
     background-color: white;
     padding: 2rem;
-}
-#save-employee-form label, #modify-delete-employee-form label {
-    font-size: 2rem;
-    padding:  0.5rem 0;
-}
-#save-employee-form input, #modify-delete-employee-form input,select {
-    font-size: 1.8rem;
-    padding: 0.5rem 0 0.5rem 0.5rem;
-}
-#save-employee-form button, #modify-delete-employee-form button {
-    font-size: 2rem;
-    padding: 0.5rem 0rem;
-    color: white;
-    background: green;
-    border: none;
-    border-radius: 0.2rem;
-}
-#save-employee-form button:hover, #modify-delete-employee-form button:hover {
-    cursor: pointer;
-    background-color: #3A7734;
-    border: 1px solid black;
-}
-#modify-delete-employee-form > div button {
-    padding: 1rem 2rem;
-    background-color: red;
-}
-#modify-delete-employee-form > div button:hover {
-    padding: 1rem 2rem;
-    background-color: rgb(186, 4, 4);
 }

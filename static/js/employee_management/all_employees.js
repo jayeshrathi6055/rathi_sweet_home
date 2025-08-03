@@ -1,3 +1,4 @@
+nav_dropdown_active_link("employee-information-nav-link");
 const employeeData = JSON.parse(document.getElementById("employee-data").textContent);
 
 function showSaveEmployeeForm() {
@@ -28,18 +29,23 @@ function modifyDeleteEmployeeFormEventListeners() {
 }
 
 function updateModifyDeleteEmployeeFormInputValues() {
-    const formChildren = document.getElementById("modify-delete-employee-form").children;
     const selectElement = document.getElementById("modify-name");
     const selectedText = selectElement.options[selectElement.selectedIndex].text;
+    const ageElement = document.getElementById("modify-age");
+    const streetAddressElement = document.getElementById("modify-street_address");
+    const cityElement = document.getElementById("modify-city");
+    const stateElement = document.getElementById("modify-state");
+    const dateOfBirthElement = document.getElementById("modify-date_of_birth");
+    const salaryElement = document.getElementById("modify-salary");
 
     employeeData.forEach(element => {
-        if (element.name == selectedText) {
-            formChildren.age.value = element.age;
-            formChildren.street_address.value = element.street_address;
-            formChildren.city.value = element.city;
-            formChildren.state.value = element.state;
-            formChildren.date_of_birth.value = formatDateToInput(element.date_of_birth);
-            formChildren.salary.value = element.salary;
+        if (element.name === selectedText) {
+            ageElement.value = element.age;
+            streetAddressElement.value = element.street_address;
+            cityElement.value = element.city;
+            stateElement.value = element.state;
+            dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
+            salaryElement.value = element.salary;
         }
     });
 }

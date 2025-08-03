@@ -1,27 +1,27 @@
 {% extends "index.html" %}
 {% block title %}Rathi Sweet Home - Employee Management - All Employees{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="{{url_for('static',filename = 'css/employee_management/save_transactions.css')}}">
 {% endblock %}
 {% block content %}
-<main class="w-80 m-tb-2rem">
-    <div id="heading">
-        <h2>Save Transactions</h2>
-    </div>
+<div class="container-xl my-3">
+    <h2 class="mb-3">Save Transactions</h2>
+
     <form action="" method="POST">
-        <label for="user-name-id">User Name</label>
-        <select name="user_id" id="user-name-id">
-            {% for employee in employees %}
-            <option value="{{ employee._id }}">{{ employee.name }}-{{ employee._id }}</option>
-            {% endfor %}
-        </select>
-
-        <label for="amount">Enter Amount</label>
-        <input type="text" name="amount" id="amount" required>
-
-        <button type="submit">Save</button>
+        <div class="mb-3">
+            <label for="user-name-id" class="form-label">User Name</label>
+            <select class="form-select form-select-lg" aria-label="Large select example" name="user_id"
+                id="user-name-id">
+                {% for employee in employees %}
+                <option value="{{ employee._id }}">{{ employee.name }}-{{ employee._id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="text" name="amount" class="form-control" id="amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-</main>
+</div>
 <script src="{{url_for('static',filename = 'js/employee_management/save_transactions.js')}}"></script>
 {% endblock %}
