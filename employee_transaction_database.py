@@ -12,8 +12,9 @@ class EmployeeTransactionDatabase:
     def fetch_employee(self, filter_args=None):
         if filter_args is None:
             filter_args = {"type": UserType.EMPLOYEE}
-        employees = self.__user_collection.find(filter_args).sort("created_at", -1)
-        return tuple({**emp, "_id": str(emp["_id"])} for emp in employees)
+        employees = self.__user_collection.find(filter_args)
+        sorted_employees = sorted(employees, key=lambda employee: employee.get('created_at', datetime.now()), reverse=True)
+        return tuple({**emp, "_id": str(emp["_id"])} for emp in sorted_employees)
 
     def save_employee(self, employee:Employee):
         return self.__user_collection.insert_one(EmployeeMapper.for_save_dict(employee))
@@ -34,9 +35,10 @@ class EmployeeTransactionDatabase:
             limit = 7
         if user_id:
             filter_args["user_id"] = ObjectId(user_id)
-        all_transactions = tuple(self.__transaction_collection.find(filter_args).sort("created_at", -1).limit(limit))
+        all_transactions = tuple(self.__transaction_collection.find(filter_args).limit(limit))
+        sorted_transactions = sorted(all_transactions, key=lambda t: datetime.fromisoformat(t.get("created_at", datetime.now())), reverse=True)
         user_transactions = []
-        for i in all_transactions:
+        for i in sorted_transactions:
             i['user_name'] = self.__user_collection.find_one({"_id": ObjectId(i['user_id'])})['name']
             user_transactions.append(i)
         return user_transactions

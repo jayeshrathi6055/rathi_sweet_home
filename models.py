@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime
 from enum import Enum
 from bson import ObjectId
@@ -19,11 +19,11 @@ class Employee:
     date_of_birth: date = None
     salary: int = None
     type: str = UserType.EMPLOYEE
-    created_at: datetime = datetime.now(ZoneInfo("Asia/Kolkata"))
+    created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
 
 @dataclass
 class EmployeeTransaction:
     _id: ObjectId = None
     user_id: ObjectId = None
     amount: float = None
-    created_at: datetime = datetime.now(ZoneInfo("Asia/Kolkata"))
+    created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
