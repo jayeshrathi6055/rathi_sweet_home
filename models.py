@@ -27,3 +27,15 @@ class EmployeeTransaction:
     user_id: ObjectId = None
     amount: float = None
     created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
+
+@dataclass
+class Expense:
+    _id: ObjectId = None
+    category: str = None
+    amount: float = None
+    created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).date().isoformat())
+
+@dataclass
+class ExpenseCategory:
+    _id: ObjectId = None
+    category: str = None

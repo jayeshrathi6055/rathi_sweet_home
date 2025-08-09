@@ -34,3 +34,18 @@ class EmployeeTransactionMapper:
         emp_trc_dict["amount"] = float(emp_trc_dict["amount"])
         emp_trc_dict.pop("_id")
         return emp_trc_dict
+
+class ExpenseMapper:
+    @staticmethod
+    def for_save_dict(expense: Expense):
+        expense_dict = asdict(expense)
+        expense_dict.pop("_id")
+        expense_dict['amount'] = float(expense_dict["amount"])
+        return expense_dict
+
+class ExpenseCategoryMapper:
+    @staticmethod
+    def for_save_dict(expense_category: ExpenseCategory):
+        expense_category_dict = asdict(expense_category)
+        expense_category_dict.pop("_id")
+        return expense_category_dict

@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{% block title %}Rathi Sweet Home - Expense Tracker{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container-xl my-3">
+    <h2 class="mb-3 text-center">Expense Tracker</h2>
+
+    <div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Save Daily Expenses</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveExpenseCategory">
+                New Expense Category
+            </button>
+            <div class="modal fade" id="saveExpenseCategory" tabindex="-1" aria-labelledby="saveExpenseCategoryLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="saveExpenseCategoryLabel">Create new expense category</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/expenses/addExpenseCategory" method="POST">
+                                <div class="mb-3">
+                                    <label for="expense-category" class="form-label">Expense Category</label>
+                                    <input type="text" name="category" class="form-control" id="expense-category"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Category</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="/expenses/addExpense" method="POST">
+            <div class="mb-3">
+                <label for="categories" class="form-label">Select Categories</label>
+                <select class="form-select form-select-lg" aria-label="Large select example" name="category"
+                    id="categories">
+                    {% for category in expense_categories %}
+                    <option value="{{ category.category }}">{{ category.category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="text" name="amount" class="form-control" id="amount" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+        </form>
+    </div>
+
+</div>
+<script src="{{url_for('static',filename = 'js/employee_management/view_transactions.js')}}"></script>
+{% endblock %}
