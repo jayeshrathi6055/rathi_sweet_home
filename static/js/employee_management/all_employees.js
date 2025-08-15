@@ -36,7 +36,8 @@ function updateModifyDeleteEmployeeFormInputValues() {
     const cityElement = document.getElementById("modify-city");
     const stateElement = document.getElementById("modify-state");
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
-    const salaryElement = document.getElementById("modify-salary");
+    const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
+    const monthlySalaryLeftElement = document.getElementById("modify-monthly-salary-left");
 
     employeeData.forEach(element => {
         if (element.name === selectedText) {
@@ -45,7 +46,8 @@ function updateModifyDeleteEmployeeFormInputValues() {
             cityElement.value = element.city;
             stateElement.value = element.state;
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
-            salaryElement.value = element.salary;
+            monthlySalaryBaseElement.value = element.monthly_salary_base;
+            monthlySalaryLeftElement.value = element.monthly_salary_left;
         }
     });
 }

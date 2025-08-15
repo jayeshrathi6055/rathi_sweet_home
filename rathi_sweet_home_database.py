@@ -47,7 +47,12 @@ class RathiSweetHomeDatabase:
         return user_transactions
 
     def save_transaction(self, employee_transaction:EmployeeTransaction):
-        return self.__transaction_collection.insert_one(EmployeeTransactionMapper.for_save_dict(employee_transaction))
+        employee_transaction_to_dict = EmployeeTransactionMapper.for_save_dict(employee_transaction)
+        transaction_saved = self.__transaction_collection.insert_one(employee_transaction_to_dict)
+
+        self.__update_employee_monthly_salary_left(employee_transaction_to_dict['user_id'], employee_transaction.amount)
+
+        return transaction_saved
 
     def fetch_expenses(self, created_date: str):
         return tuple(self.__expense_collection.find({"created_at": created_date}))
@@ -62,3 +67,15 @@ class RathiSweetHomeDatabase:
 
     def save_expense_category(self, expense_category : ExpenseCategory):
         return self.__expense_category_collection.insert_one(ExpenseCategoryMapper.for_save_dict(expense_category))
+
+    def __update_employee_monthly_salary_left(self, user_id, transaction_amount):
+        saved_employee = self.__user_collection.find_one({"_id": user_id})
+
+        current_salary_left = int(saved_employee.get('monthly_salary_left', '0'))
+        updated_salary_left = str(current_salary_left - int(transaction_amount))
+
+        self.__user_collection.update_one(
+            {"_id": user_id},
+            {"$set": {"monthly_salary_left": updated_salary_left}}
+        )
+

@@ -7,6 +7,7 @@ class EmployeeMapper:
         emp_dict = asdict(employee)
         emp_dict.pop("_id")
         emp_dict['age'] = int(emp_dict['age'])
+        emp_dict['monthly_salary_left'] = emp_dict['monthly_salary_base']
         return emp_dict
 
     @staticmethod

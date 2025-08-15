@@ -24,7 +24,8 @@
                 <th>AGE</th>
                 <th>ADDRESS</th>
                 <th>DATE OF BIRTH</th>
-                <th>SALARY</th>
+                <th>MONTHLY_SALARY</th>
+                <th>MONTHLY_SALARY_LEFT</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +36,8 @@
                 <td>{{ employee.age }}</td>
                 <td>{{ employee.street_address }}, {{ employee.city }}, {{ employee.state }}</td>
                 <td>{{ employee.date_of_birth }}</td>
-                <td>{{ employee.salary }}</td>
+                <td>{{ employee.monthly_salary_base }}</td>
+                <td>{{ employee.monthly_salary_left }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -70,8 +72,8 @@
             <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" required>
         </div>
         <div class="mb-3">
-            <label for="salary" class="form-label">Salary</label>
-            <input type="number" name="salary" class="form-control" id="salary" required>
+            <label for="monthly_salary_base" class="form-label">Monthly Salary</label>
+            <input type="number" name="monthly_salary_base" class="form-control" id="monthly_salary_base" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -110,8 +112,12 @@
             <input type="date" name="date_of_birth" class="form-control" id="modify-date_of_birth" required>
         </div>
         <div class="mb-3">
-            <label for="modify-salary" class="form-label">Salary</label>
-            <input type="number" name="salary" class="form-control" id="modify-salary" required>
+            <label for="modify-monthly-salary-base" class="form-label">Monthly Salary Base</label>
+            <input type="number" name="monthly_salary_base" class="form-control" id="modify-monthly-salary-base" required>
+        </div>
+        <div class="mb-3">
+            <label for="modify-monthly-salary-left" class="form-label">Monthly Salary Left</label>
+            <input type="number" name="monthly_salary_left" class="form-control" id="modify-monthly-salary-left" required>
         </div>
         <div>
             <button type="submit" class="btn btn-danger" id="modify-btn">Modify</button>

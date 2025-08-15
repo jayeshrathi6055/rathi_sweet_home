@@ -17,7 +17,8 @@ class Employee:
     city: str = None
     state: str = None
     date_of_birth: date = None
-    salary: int = None
+    monthly_salary_base: int = None
+    monthly_salary_left: int = None
     type: str = UserType.EMPLOYEE
     created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
 
