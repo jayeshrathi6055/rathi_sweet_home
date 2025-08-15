@@ -23,9 +23,23 @@ function modifyDeleteEmployeeFormEventListeners() {
 
     selectElement.addEventListener("change", () => updateModifyDeleteEmployeeFormInputValues());
 
-    modifyBtn.addEventListener("click", () => formMethod.value = "PUT");
+    modifyBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const confirmed = confirm("Are you sure you want to modify this employee?")
+        if (confirmed) {
+            formMethod.value = "PUT"
+            formMethod.parentElement.submit();
+        }
+    });
 
-    deleteBtn.addEventListener("click", () => formMethod.value = "DELETE");
+    deleteBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const confirmed = confirm("Are you sure you want to delete this employee?")
+        if (confirmed) {
+            formMethod.value = "DELETE"
+            formMethod.parentElement.submit();
+        }
+    });
 }
 
 function updateModifyDeleteEmployeeFormInputValues() {
