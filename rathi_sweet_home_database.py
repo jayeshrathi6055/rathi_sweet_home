@@ -46,11 +46,21 @@ class RathiSweetHomeDatabase:
             user_transactions.append(i)
         return user_transactions
 
-    def save_transaction(self, employee_transaction:EmployeeTransaction):
-        employee_transaction_to_dict = EmployeeTransactionMapper.for_save_dict(employee_transaction)
-        transaction_saved = self.__transaction_collection.insert_one(employee_transaction_to_dict)
+    def save_transaction(self, employee_transaction: EmployeeTransaction):
+        # Convert transaction to dictionary format
+        transaction_dict = EmployeeTransactionMapper.for_save_dict(employee_transaction)
 
-        self.__update_employee_monthly_salary_left(employee_transaction_to_dict['user_id'], employee_transaction.amount)
+        # Save transaction to the database
+        transaction_saved = self.__transaction_collection.insert_one(transaction_dict)
+
+        # Update user's monthly salary left
+        user_id = transaction_dict['user_id']
+        amount = int(employee_transaction.amount)
+
+        self.__user_collection.update_one(
+            {"_id": user_id},
+            {"$inc": {"monthly_salary_left": -amount}}
+        )
 
         return transaction_saved
 
@@ -67,15 +77,4 @@ class RathiSweetHomeDatabase:
 
     def save_expense_category(self, expense_category : ExpenseCategory):
         return self.__expense_category_collection.insert_one(ExpenseCategoryMapper.for_save_dict(expense_category))
-
-    def __update_employee_monthly_salary_left(self, user_id, transaction_amount):
-        saved_employee = self.__user_collection.find_one({"_id": user_id})
-
-        current_salary_left = int(saved_employee.get('monthly_salary_left', '0'))
-        updated_salary_left = str(current_salary_left - int(transaction_amount))
-
-        self.__user_collection.update_one(
-            {"_id": user_id},
-            {"$set": {"monthly_salary_left": updated_salary_left}}
-        )
 
