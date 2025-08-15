@@ -7,7 +7,7 @@
 </script>
 {% endblock %}
 {% block content %}
-<div class="container-xl my-3">
+<div class="container-xxl my-3 overflow-x-auto">
     <div class="d-flex justify-content-between align-items-center flex-wrap">
         <h2>All Employees</h2>
         <div class="d-flex align-items-center justify-content-between gap-3">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <table class="table my-3">
+    <table class="table my-3" style="white-space: nowrap">
         <thead class="table-light">
             <tr>
                 <th>ID</th>
@@ -24,8 +24,8 @@
                 <th>AGE</th>
                 <th>ADDRESS</th>
                 <th>DATE OF BIRTH</th>
-                <th>MONTHLY_SALARY</th>
-                <th>MONTHLY_SALARY_LEFT</th>
+                <th>MONTHLY SALARY BASE</th>
+                <th>MONTHLY SALARY LEFT</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
                 <td>{{ employee._id }}</td>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.age }}</td>
-                <td>{{ employee.street_address }}, {{ employee.city }}, {{ employee.state }}</td>
+                <td style="white-space: wrap">{{ employee.street_address }}, {{ employee.city }}, {{ employee.state }}</td>
                 <td>{{ employee.date_of_birth }}</td>
                 <td>{{ employee.monthly_salary_base }}</td>
                 <td>{{ employee.monthly_salary_left }}</td>
