@@ -1,7 +1,10 @@
+import calendar
+
 import pymongo
 from flask_pymongo import PyMongo
-from datetime import datetime, timedelta
+
 from mappers import *
+
 
 class RathiSweetHomeDatabase:
 
@@ -88,40 +91,53 @@ class RathiSweetHomeDatabase:
 
     def save_employee_absence(self, employee_absence: EmployeeAbsence):
         employee_absence_dict = EmployeeAbsenceMapper.for_save_dict(employee_absence)
-        check_employee_absence = self.__employee_absence_collection.find_one(employee_absence_dict)
 
+        # Check for existing absence
+        check_employee_absence = self.__employee_absence_collection.find_one(employee_absence_dict)
         if check_employee_absence:
             return check_employee_absence
 
+        # Save new absence
         employee_absence_saved = self.__employee_absence_collection.insert_one(employee_absence_dict)
 
-        user_id = employee_absence_dict['user_id']
-        leaves = (date.fromisoformat(employee_absence_dict['end_date']) - date.fromisoformat(employee_absence_dict['start_date'])).days
-        saved_employee = self.__user_collection.find_one({"_id": user_id})
-        current_employee_leaves = saved_employee["leaves"]
-        updated_leaves = current_employee_leaves - leaves
+        if AbsenceType.LEAVE == employee_absence_dict['absence_type']:
+            # Calculate leave days
+            start_date = date.fromisoformat(employee_absence_dict['start_date'])
+            end_date = date.fromisoformat(employee_absence_dict['end_date'])
+            leaves = (end_date - start_date).days
 
-        if current_employee_leaves > 0 and updated_leaves >= 0:
-            self.__user_collection.update_one(
-                {"_id": user_id},
-                {"$inc": {"leaves": -leaves}}
-            )
-            return employee_absence_saved
+            user_id = employee_absence_dict['user_id']
+            saved_employee = self.__user_collection.find_one({"_id": user_id})
+            current_leaves = saved_employee.get("leaves", 0)
+            monthly_salary_base = saved_employee.get("monthly_salary_base", 0)
 
-        today = datetime.now(ZoneInfo("Asia/Kolkata"))
-        no_of_day_in_month = ((today.replace(day=1) + timedelta(days=32)).replace(day=1) - timedelta(days=1)).day
-        salary_per_day = saved_employee['monthly_salary_base'] / no_of_day_in_month
+            updated_leaves = current_leaves - leaves
 
-        if current_employee_leaves <= 0:
-            self.__user_collection.update_one(
-                {"_id": user_id},
-                {"$inc": {"monthly_salary_left": -salary_per_day*leaves, "leaves": -leaves}}
-            )
-        elif current_employee_leaves > 0 > updated_leaves:
-            self.__user_collection.update_one(
-                {"_id": user_id},
-                {"$inc": {"monthly_salary_left": salary_per_day * updated_leaves, "leaves": -leaves}}
-            )
+            # Update based on leave balance
+            if current_leaves > 0 and updated_leaves >= 0:
+                self.__user_collection.update_one(
+                    {"_id": user_id},
+                    {"$inc": {"leaves": -leaves}}
+                )
+            else:
+                today = datetime.now(ZoneInfo("Asia/Kolkata"))
+                no_of_day_in_month = calendar.monthrange(today.year, today.month)[1]
+                salary_per_day = monthly_salary_base / no_of_day_in_month
+
+                salary_deduction = 0
+                if current_leaves <= 0:
+                    salary_deduction = salary_per_day * leaves
+                elif updated_leaves < 0:
+                    salary_deduction = salary_per_day * abs(updated_leaves)
+
+                self.__user_collection.update_one(
+                    {"_id": user_id},
+                    {"$inc": {
+                        "monthly_salary_left": -salary_deduction,
+                        "leaves": -leaves
+                    }}
+                )
 
         return employee_absence_saved
+
 
