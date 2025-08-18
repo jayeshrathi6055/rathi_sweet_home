@@ -26,6 +26,7 @@
                 <th>DATE OF BIRTH</th>
                 <th>MONTHLY SALARY BASE</th>
                 <th>MONTHLY SALARY LEFT</th>
+                <th>Total Leaves</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                 <td>{{ employee.date_of_birth }}</td>
                 <td>{{ employee.monthly_salary_base }}</td>
                 <td>{{ employee.monthly_salary_left }}</td>
+                <td>{{ employee.leaves }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -74,6 +76,10 @@
         <div class="mb-3">
             <label for="monthly_salary_base" class="form-label">Monthly Salary</label>
             <input type="number" name="monthly_salary_base" class="form-control" id="monthly_salary_base" required>
+        </div>
+        <div class="mb-3">
+            <label for="leaves" class="form-label">Leaves</label>
+            <input type="number" name="leaves" class="form-control" id="leaves" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -118,6 +124,10 @@
         <div class="mb-3">
             <label for="modify-monthly-salary-left" class="form-label">Monthly Salary Left</label>
             <input type="text" name="monthly_salary_left" class="form-control" id="modify-monthly-salary-left" required>
+        </div>
+        <div class="mb-3">
+            <label for="modify-leaves" class="form-label">Total Leaves</label>
+            <input type="text" name="leaves" class="form-control" id="modify-leaves" required>
         </div>
         <div>
             <button type="submit" class="btn btn-danger" id="modify-btn">Modify</button>

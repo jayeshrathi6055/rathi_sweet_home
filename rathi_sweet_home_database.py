@@ -1,5 +1,6 @@
 import pymongo
 from flask_pymongo import PyMongo
+from datetime import datetime, timedelta
 from mappers import *
 
 class RathiSweetHomeDatabase:
@@ -9,12 +10,15 @@ class RathiSweetHomeDatabase:
         self.__db = self.__mongo.db
         self.__user_collection = self.__db['users']
         self.__transaction_collection = self.__db['transactions']
+        self.__employee_absence_collection = self.__db['employee_absences']
         self.__expense_collection = self.__db['expenses']
         self.__expense_category_collection = self.__db['expense_categories']
 
     def fetch_employee(self, filter_args=None):
         if filter_args is None:
             filter_args = {"type": UserType.EMPLOYEE}
+        else:
+            filter_args["type"] = UserType.EMPLOYEE
         employees = self.__user_collection.find(filter_args).sort("created_at", -1)
         return tuple({**emp, "_id": str(emp["_id"])} for emp in employees)
 
@@ -81,4 +85,43 @@ class RathiSweetHomeDatabase:
 
     def save_expense_category(self, expense_category : ExpenseCategory):
         return self.__expense_category_collection.insert_one(ExpenseCategoryMapper.for_save_dict(expense_category))
+
+    def save_employee_absence(self, employee_absence: EmployeeAbsence):
+        employee_absence_dict = EmployeeAbsenceMapper.for_save_dict(employee_absence)
+        check_employee_absence = self.__employee_absence_collection.find_one(employee_absence_dict)
+
+        if check_employee_absence:
+            return check_employee_absence
+
+        employee_absence_saved = self.__employee_absence_collection.insert_one(employee_absence_dict)
+
+        user_id = employee_absence_dict['user_id']
+        leaves = (date.fromisoformat(employee_absence_dict['end_date']) - date.fromisoformat(employee_absence_dict['start_date'])).days
+        saved_employee = self.__user_collection.find_one({"_id": user_id})
+        current_employee_leaves = saved_employee["leaves"]
+        updated_leaves = current_employee_leaves - leaves
+
+        if current_employee_leaves > 0 and updated_leaves >= 0:
+            self.__user_collection.update_one(
+                {"_id": user_id},
+                {"$inc": {"leaves": -leaves}}
+            )
+            return employee_absence_saved
+
+        today = datetime.now(ZoneInfo("Asia/Kolkata"))
+        no_of_day_in_month = ((today.replace(day=1) + timedelta(days=32)).replace(day=1) - timedelta(days=1)).day
+        salary_per_day = saved_employee['monthly_salary_base'] / no_of_day_in_month
+
+        if current_employee_leaves <= 0:
+            self.__user_collection.update_one(
+                {"_id": user_id},
+                {"$inc": {"monthly_salary_left": -salary_per_day*leaves, "leaves": -leaves}}
+            )
+        elif current_employee_leaves > 0 > updated_leaves:
+            self.__user_collection.update_one(
+                {"_id": user_id},
+                {"$inc": {"monthly_salary_left": salary_per_day * updated_leaves, "leaves": -leaves}}
+            )
+
+        return employee_absence_saved
 

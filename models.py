@@ -7,6 +7,10 @@ from zoneinfo import ZoneInfo
 class UserType(str, Enum):
     EMPLOYEE = 'EMPLOYEE'
     ADMIN = 'ADMIN'
+    
+class AbsenceType(str, Enum):
+    HOLIDAY = 'HOLIDAY'
+    LEAVE = 'LEAVE'
 
 @dataclass
 class Employee:
@@ -19,6 +23,7 @@ class Employee:
     date_of_birth: date = None
     monthly_salary_base: float = None
     monthly_salary_left: float = None
+    leaves: int = 0
     type: str = UserType.EMPLOYEE
     created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
 
@@ -40,3 +45,11 @@ class Expense:
 class ExpenseCategory:
     _id: ObjectId = None
     category: str = None
+
+@dataclass
+class EmployeeAbsence:
+    _id: ObjectId = None
+    user_id: ObjectId = None
+    absence_type: AbsenceType = None
+    start_date: str = None
+    end_date: str = None

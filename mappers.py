@@ -7,6 +7,7 @@ class EmployeeMapper:
         emp_dict = asdict(employee)
         emp_dict.pop("_id")
         emp_dict['age'] = int(emp_dict['age'])
+        emp_dict['leaves'] = int(emp_dict['leaves'])
         emp_dict['monthly_salary_base'] = float(emp_dict['monthly_salary_base'])
         emp_dict['monthly_salary_left'] = emp_dict['monthly_salary_base']
         return emp_dict
@@ -16,6 +17,7 @@ class EmployeeMapper:
         emp_dict = asdict(employee)
         emp_dict["_id"] = ObjectId(emp_dict["_id"])
         emp_dict['age'] = int(emp_dict['age'])
+        emp_dict['leaves'] = int(emp_dict['leaves'])
         emp_dict['monthly_salary_base'] = float(emp_dict['monthly_salary_base'])
         emp_dict['monthly_salary_left'] = float(emp_dict['monthly_salary_left'])
         emp_dict.pop("created_at")
@@ -27,6 +29,7 @@ class EmployeeMapper:
         emp_dict = asdict(employee)
         emp_dict["_id"] = ObjectId(emp_dict["_id"])
         emp_dict['age'] = int(emp_dict['age'])
+        emp_dict['leaves'] = int(emp_dict['leaves'])
         emp_dict['monthly_salary_base'] = float(emp_dict['monthly_salary_base'])
         emp_dict['monthly_salary_left'] = float(emp_dict['monthly_salary_left'])
         emp_dict.pop("created_at")
@@ -55,3 +58,11 @@ class ExpenseCategoryMapper:
         expense_category_dict = asdict(expense_category)
         expense_category_dict.pop("_id")
         return expense_category_dict
+
+class EmployeeAbsenceMapper:
+    @staticmethod
+    def for_save_dict(employee_absence: EmployeeAbsence):
+        employee_absence_dict = asdict(employee_absence)
+        employee_absence_dict['user_id'] = ObjectId(employee_absence_dict["user_id"])
+        employee_absence_dict.pop("_id")
+        return employee_absence_dict

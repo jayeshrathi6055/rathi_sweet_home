@@ -59,6 +59,15 @@ def save_transactions():
                            employees=rathi_sweet_home_database.fetch_employee())
 
 
+@app.route('/employeeManagement/holidays', methods=['GET', 'POST'])
+def holidays():
+    if request.method == "POST":
+        data = request.form.to_dict()
+        employee_absence = EmployeeAbsence(**data)
+        rathi_sweet_home_database.save_employee_absence(employee_absence)
+    return render_template("employee_management/holidays.html", employees=rathi_sweet_home_database.fetch_employee())
+
+
 @app.route('/expenses')
 def expenses():
     filters = request.args.to_dict()

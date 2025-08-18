@@ -52,6 +52,7 @@ function updateModifyDeleteEmployeeFormInputValues() {
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
     const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
     const monthlySalaryLeftElement = document.getElementById("modify-monthly-salary-left");
+    const leavesElement = document.getElementById("modify-leaves");
 
     employeeData.forEach(element => {
         if (element.name === selectedText) {
@@ -62,6 +63,7 @@ function updateModifyDeleteEmployeeFormInputValues() {
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
             monthlySalaryBaseElement.value = element.monthly_salary_base;
             monthlySalaryLeftElement.value = element.monthly_salary_left;
+            leavesElement.value = element.leaves;
         }
     });
 }

@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% block title %}Rathi Sweet Home - Employee Management - All Employees{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container-xl my-3">
+    <h2 class="mb-3 text-center">Employee Absence Tracker</h2>
+
+    <form action="" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <select class="form-select form-select-lg" aria-label="Large select example" name="user_id" id="name">
+                {% for employee in employees %}
+                <option value="{{ employee._id }}">{{ employee.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="absence-type" class="form-label">Absence Type</label>
+            <select class="form-select form-select-lg" aria-label="Large select example" name="absence_type" id="absence-type">
+                <option value="LEAVE" selected>LEAVE - will cut salary of employee</option>
+                <option value="HOLIDAY">HOLIDAY - will not cut salary of employee</option>
+            </select>
+        </div>
+        <div class="mb-3 d-flex gap-3">
+            <div>
+                <label for="start-date" class="form-label">Start Date</label>
+                <input type="date" name="start_date" class="form-control" id="start-date" required>
+            </div>
+            <div>
+                <label for="end-date" class="form-label">End Date</label>
+                <input type="date" name="end_date" class="form-control" id="end-date" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
