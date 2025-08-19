@@ -93,7 +93,12 @@ class RathiSweetHomeDatabase:
         employee_absence_dict = EmployeeAbsenceMapper.for_save_dict(employee_absence)
 
         # Check for existing absence
-        check_employee_absence = self.__employee_absence_collection.find_one(employee_absence_dict)
+        check_employee_absence = self.__employee_absence_collection.find_one({
+            "user_id": employee_absence_dict["user_id"],
+            "absence_type": employee_absence_dict["absence_type"],
+            "start_date": employee_absence_dict["start_date"],
+            "end_date": employee_absence_dict["end_date"]
+        })
         if check_employee_absence:
             return check_employee_absence
 

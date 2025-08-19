@@ -53,3 +53,4 @@ class EmployeeAbsence:
     absence_type: AbsenceType = None
     start_date: str = None
     end_date: str = None
+    created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
