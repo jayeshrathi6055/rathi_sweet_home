@@ -1,5 +1,6 @@
 from dataclasses import asdict
-from models import *
+from bson.objectid import ObjectId
+from models import Employee
 
 class EmployeeMapper:
     @staticmethod
@@ -34,35 +35,3 @@ class EmployeeMapper:
         emp_dict['monthly_salary_left'] = float(emp_dict['monthly_salary_left'])
         emp_dict.pop("created_at")
         return emp_dict
-
-class EmployeeTransactionMapper:
-    @staticmethod
-    def for_save_dict(employee_transaction: EmployeeTransaction):
-        emp_trc_dict = asdict(employee_transaction)
-        emp_trc_dict["user_id"] = ObjectId(emp_trc_dict["user_id"])
-        emp_trc_dict["amount"] = float(emp_trc_dict["amount"])
-        emp_trc_dict.pop("_id")
-        return emp_trc_dict
-
-class ExpenseMapper:
-    @staticmethod
-    def for_save_dict(expense: Expense):
-        expense_dict = asdict(expense)
-        expense_dict.pop("_id")
-        expense_dict['amount'] = float(expense_dict["amount"])
-        return expense_dict
-
-class ExpenseCategoryMapper:
-    @staticmethod
-    def for_save_dict(expense_category: ExpenseCategory):
-        expense_category_dict = asdict(expense_category)
-        expense_category_dict.pop("_id")
-        return expense_category_dict
-
-class EmployeeAbsenceMapper:
-    @staticmethod
-    def for_save_dict(employee_absence: EmployeeAbsence):
-        employee_absence_dict = asdict(employee_absence)
-        employee_absence_dict['user_id'] = ObjectId(employee_absence_dict["user_id"])
-        employee_absence_dict.pop("_id")
-        return employee_absence_dict

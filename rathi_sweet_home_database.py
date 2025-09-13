@@ -1,10 +1,8 @@
-import calendar
-
-import pymongo
 from flask_pymongo import PyMongo
-
 from mappers import *
-
+from models import *
+import calendar
+import pymongo
 
 class RathiSweetHomeDatabase:
 
@@ -16,6 +14,8 @@ class RathiSweetHomeDatabase:
         self.__employee_absence_collection = self.__db['employee_absences']
         self.__expense_collection = self.__db['expenses']
         self.__expense_category_collection = self.__db['expense_categories']
+
+    # -----------------------Users table operations--------------------------------
 
     def fetch_employee(self, filter_args=None):
         if filter_args is None:
@@ -35,6 +35,8 @@ class RathiSweetHomeDatabase:
 
     def delete_employee(self, employee:Employee):
         return self.__user_collection.delete_one(EmployeeMapper.for_delete_dict(employee))
+
+    # -----------------------Transactions table operations--------------------------------
 
     def fetch_user_transactions(self, **kwargs):
         filter_args = {}
@@ -75,11 +77,15 @@ class RathiSweetHomeDatabase:
 
         return transaction_saved
 
+    # -----------------------Expenses table operations--------------------------------
+
     def fetch_expenses(self, created_date: str):
         return tuple(self.__expense_collection.find({"created_at": created_date}))
 
     def save_expense(self, expense : Expense):
         return self.__expense_collection.insert_one(ExpenseMapper.for_save_dict(expense))
+
+    # -----------------------Expense Categories table operations--------------------------------
 
     def fetch_expense_categories(self, filter_args=None):
         if filter_args is None:
@@ -88,6 +94,8 @@ class RathiSweetHomeDatabase:
 
     def save_expense_category(self, expense_category : ExpenseCategory):
         return self.__expense_category_collection.insert_one(ExpenseCategoryMapper.for_save_dict(expense_category))
+
+    # -----------------------Employee Absences table operations--------------------------------
 
     def save_employee_absence(self, employee_absence: EmployeeAbsence):
         employee_absence_dict = EmployeeAbsenceMapper.for_save_dict(employee_absence)
@@ -144,5 +152,3 @@ class RathiSweetHomeDatabase:
                 )
 
         return employee_absence_saved
-
-
