@@ -45,18 +45,14 @@ function modifyDeleteEmployeeFormEventListeners() {
 function updateModifyDeleteEmployeeFormInputValues() {
     const selectElement = document.getElementById("modify-name");
     const selectedText = selectElement.options[selectElement.selectedIndex].text;
-    const streetAddressElement = document.getElementById("modify-street_address");
-    const cityElement = document.getElementById("modify-city");
-    const stateElement = document.getElementById("modify-state");
+    const addressElement = document.getElementById("modify-address");
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
     const mobileNumberElement = document.getElementById("modify-mobile_number");
     const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
 
     employeeData.forEach(element => {
         if (element.name === selectedText) {
-            streetAddressElement.value = element.street_address;
-            cityElement.value = element.city;
-            stateElement.value = element.state;
+            addressElement.value = element.address;
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
             mobileNumberElement.value = element.mobile_number;
             monthlySalaryBaseElement.value = element.monthly_salary_base;

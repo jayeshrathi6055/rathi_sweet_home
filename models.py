@@ -16,9 +16,7 @@ class AbsenceType(str, Enum):
 class Employee:
     _id: ObjectId = None
     name: str = None
-    street_address: str = None
-    city: str = None
-    state: str = None
+    address: str = None
     date_of_birth: date = None
     mobile_number: int = None
     monthly_salary_base: float = None

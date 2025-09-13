@@ -20,7 +20,8 @@ class EmployeeManagementService:
             employee = Employee(**data)
             db.save_employee(employee)
         elif request.form.get("_method") == 'DELETE':
-            db.delete_employee(data['name'])
+            data['_id'] = data['name'].split("_")[0]
+            db.delete_employee(data['_id'])
         elif request.form.get("_method") == 'PUT':
             data['_id'], data['name'] = data['name'].split("_")
             employee = Employee(**data)
