@@ -60,22 +60,7 @@ class RathiSweetHomeDatabase:
         return all_transactions
 
     def save_transaction(self, employee_transaction: EmployeeTransaction):
-        # Convert transaction to dictionary format
-        transaction_dict = EmployeeTransactionMapper.for_save_dict(employee_transaction)
-
-        # Save transaction to the database
-        transaction_saved = self.__transaction_collection.insert_one(transaction_dict)
-
-        # Update user's monthly salary left
-        user_id = transaction_dict['user_id']
-        amount = int(employee_transaction.amount)
-
-        self.__user_collection.update_one(
-            {"_id": user_id},
-            {"$inc": {"monthly_salary_left": -amount}}
-        )
-
-        return transaction_saved
+        return self.__transaction_collection.insert_one(EmployeeTransactionMapper.for_save_dict(employee_transaction))
 
     # -----------------------Expenses table operations--------------------------------
 
@@ -110,45 +95,4 @@ class RathiSweetHomeDatabase:
         if check_employee_absence:
             return check_employee_absence
 
-        # Save new absence
-        employee_absence_saved = self.__employee_absence_collection.insert_one(employee_absence_dict)
-
-        if AbsenceType.LEAVE == employee_absence_dict['absence_type']:
-            # Calculate leave days
-            start_date = date.fromisoformat(employee_absence_dict['start_date'])
-            end_date = date.fromisoformat(employee_absence_dict['end_date'])
-            leaves = (end_date - start_date).days
-
-            user_id = employee_absence_dict['user_id']
-            saved_employee = self.__user_collection.find_one({"_id": user_id})
-            current_leaves = saved_employee.get("leaves", 0)
-            monthly_salary_base = saved_employee.get("monthly_salary_base", 0)
-
-            updated_leaves = current_leaves - leaves
-
-            # Update based on leave balance
-            if current_leaves > 0 and updated_leaves >= 0:
-                self.__user_collection.update_one(
-                    {"_id": user_id},
-                    {"$inc": {"leaves": -leaves}}
-                )
-            else:
-                today = datetime.now(ZoneInfo("Asia/Kolkata"))
-                no_of_day_in_month = calendar.monthrange(today.year, today.month)[1]
-                salary_per_day = monthly_salary_base / no_of_day_in_month
-
-                salary_deduction = 0
-                if current_leaves <= 0:
-                    salary_deduction = salary_per_day * leaves
-                elif updated_leaves < 0:
-                    salary_deduction = salary_per_day * abs(updated_leaves)
-
-                self.__user_collection.update_one(
-                    {"_id": user_id},
-                    {"$inc": {
-                        "monthly_salary_left": -salary_deduction,
-                        "leaves": -leaves
-                    }}
-                )
-
-        return employee_absence_saved
+        return self.__employee_absence_collection.insert_one(employee_absence_dict)

@@ -19,27 +19,19 @@
     <table class="table my-3" style="white-space: nowrap">
         <thead class="table-light">
             <tr>
-                <th>ID</th>
                 <th>NAME</th>
-                <th>AGE</th>
                 <th>ADDRESS</th>
                 <th>DATE OF BIRTH</th>
                 <th>MONTHLY SALARY BASE</th>
-                <th>MONTHLY SALARY LEFT</th>
-                <th>Total Leaves</th>
             </tr>
         </thead>
         <tbody>
             {% for employee in employees %}
             <tr>
-                <td>{{ employee._id }}</td>
                 <td>{{ employee.name }}</td>
-                <td>{{ employee.age }}</td>
                 <td style="white-space: wrap">{{ employee.street_address }}, {{ employee.city }}, {{ employee.state }}</td>
                 <td>{{ employee.date_of_birth }}</td>
                 <td>{{ employee.monthly_salary_base }}</td>
-                <td>{{ employee.monthly_salary_left }}</td>
-                <td>{{ employee.leaves }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -52,10 +44,6 @@
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" name="name" class="form-control" id="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="age" class="form-label">Age</label>
-            <input type="number" name="age" class="form-control" id="age" required>
         </div>
         <div class="mb-3">
             <label for="street_address" class="form-label">Street Address</label>
@@ -77,10 +65,6 @@
             <label for="monthly_salary_base" class="form-label">Monthly Salary</label>
             <input type="number" name="monthly_salary_base" class="form-control" id="monthly_salary_base" required>
         </div>
-        <div class="mb-3">
-            <label for="leaves" class="form-label">Leaves</label>
-            <input type="number" name="leaves" class="form-control" id="leaves" required>
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
@@ -96,10 +80,6 @@
                 <option value="{{ employee._id }}_{{employee.name}}">{{ employee.name }}</option>
                 {% endfor %}
             </select>
-        </div>
-        <div class="mb-3">
-            <label for="modify-age" class="form-label">Age</label>
-            <input type="number" name="age" class="form-control" id="modify-age" required>
         </div>
         <div class="mb-3">
             <label for="modify-street_address" class="form-label">Street Address</label>
@@ -120,14 +100,6 @@
         <div class="mb-3">
             <label for="modify-monthly-salary-base" class="form-label">Monthly Salary Base</label>
             <input type="text" name="monthly_salary_base" class="form-control" id="modify-monthly-salary-base" required>
-        </div>
-        <div class="mb-3">
-            <label for="modify-monthly-salary-left" class="form-label">Monthly Salary Left</label>
-            <input type="text" name="monthly_salary_left" class="form-control" id="modify-monthly-salary-left" required>
-        </div>
-        <div class="mb-3">
-            <label for="modify-leaves" class="form-label">Total Leaves</label>
-            <input type="text" name="leaves" class="form-control" id="modify-leaves" required>
         </div>
         <div>
             <button type="submit" class="btn btn-danger" id="modify-btn">Modify</button>

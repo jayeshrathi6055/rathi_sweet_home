@@ -45,25 +45,19 @@ function modifyDeleteEmployeeFormEventListeners() {
 function updateModifyDeleteEmployeeFormInputValues() {
     const selectElement = document.getElementById("modify-name");
     const selectedText = selectElement.options[selectElement.selectedIndex].text;
-    const ageElement = document.getElementById("modify-age");
     const streetAddressElement = document.getElementById("modify-street_address");
     const cityElement = document.getElementById("modify-city");
     const stateElement = document.getElementById("modify-state");
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
     const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
-    const monthlySalaryLeftElement = document.getElementById("modify-monthly-salary-left");
-    const leavesElement = document.getElementById("modify-leaves");
 
     employeeData.forEach(element => {
         if (element.name === selectedText) {
-            ageElement.value = element.age;
             streetAddressElement.value = element.street_address;
             cityElement.value = element.city;
             stateElement.value = element.state;
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
             monthlySalaryBaseElement.value = element.monthly_salary_base;
-            monthlySalaryLeftElement.value = element.monthly_salary_left;
-            leavesElement.value = element.leaves;
         }
     });
 }
