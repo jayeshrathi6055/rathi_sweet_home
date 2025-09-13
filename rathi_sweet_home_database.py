@@ -17,11 +17,12 @@ class RathiSweetHomeDatabase:
 
     # -----------------------Users table operations--------------------------------
 
-    def fetch_employee(self, filter_args=None):
+    def fetch_active_employee(self, filter_args=None):
         if filter_args is None:
-            filter_args = {"type": UserType.EMPLOYEE}
+            filter_args = {"type": UserType.EMPLOYEE, "active": True}
         else:
             filter_args["type"] = UserType.EMPLOYEE
+            filter_args["active"] = True
         employees = self.__user_collection.find(filter_args).sort("created_at", -1)
         return tuple({**emp, "_id": str(emp["_id"])} for emp in employees)
 
@@ -33,8 +34,8 @@ class RathiSweetHomeDatabase:
         employee_id = employee_dict.pop("_id")
         return self.__user_collection.update_one({"_id": employee_id}, {"$set": employee_dict})
 
-    def delete_employee(self, employee:Employee):
-        return self.__user_collection.delete_one(EmployeeMapper.for_delete_dict(employee))
+    def delete_employee(self, user_id:str):
+        return self.__user_collection.update_one({"_id": ObjectId(user_id)}, {"$set": {'active': False}})
 
     # -----------------------Transactions table operations--------------------------------
 

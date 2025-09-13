@@ -49,6 +49,7 @@ function updateModifyDeleteEmployeeFormInputValues() {
     const cityElement = document.getElementById("modify-city");
     const stateElement = document.getElementById("modify-state");
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
+    const mobileNumberElement = document.getElementById("modify-mobile_number");
     const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
 
     employeeData.forEach(element => {
@@ -57,6 +58,7 @@ function updateModifyDeleteEmployeeFormInputValues() {
             cityElement.value = element.city;
             stateElement.value = element.state;
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
+            mobileNumberElement.value = element.mobile_number;
             monthlySalaryBaseElement.value = element.monthly_salary_base;
         }
     });

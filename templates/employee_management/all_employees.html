@@ -22,6 +22,7 @@
                 <th>NAME</th>
                 <th>ADDRESS</th>
                 <th>DATE OF BIRTH</th>
+                <th>MOBILE NUMBER</th>
                 <th>MONTHLY SALARY BASE</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{ employee.name }}</td>
                 <td style="white-space: wrap">{{ employee.street_address }}, {{ employee.city }}, {{ employee.state }}</td>
                 <td>{{ employee.date_of_birth }}</td>
+                <td>{{ employee.mobile_number }}</td>
                 <td>{{ employee.monthly_salary_base }}</td>
             </tr>
             {% endfor %}
@@ -62,6 +64,10 @@
             <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" required>
         </div>
         <div class="mb-3">
+            <label for="mobile_number" class="form-label">Mobile Number</label>
+            <input type="number" name="mobile_number" class="form-control" id="mobile_number" required>
+        </div>
+        <div class="mb-3">
             <label for="monthly_salary_base" class="form-label">Monthly Salary</label>
             <input type="number" name="monthly_salary_base" class="form-control" id="monthly_salary_base" required>
         </div>
@@ -77,7 +83,7 @@
             <label for="modify-name" class="form-label">Name</label>
             <select class="form-select form-select-lg" aria-label="Large select example" name="name" id="modify-name">
                 {% for employee in employees %}
-                <option value="{{ employee._id }}_{{employee.name}}">{{ employee.name }}</option>
+                <option value="{{ employee._id }}">{{ employee.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -96,6 +102,10 @@
         <div class="mb-3">
             <label for="modify-date_of_birth" class="form-label">Date of Birth</label>
             <input type="date" name="date_of_birth" class="form-control" id="modify-date_of_birth" required>
+        </div>
+        <div class="mb-3">
+            <label for="modify-mobile_number" class="form-label">Mobile Number</label>
+            <input type="number" name="mobile_number" class="form-control" id="modify-mobile_number" required>
         </div>
         <div class="mb-3">
             <label for="modify-monthly-salary-base" class="form-label">Monthly Salary Base</label>
