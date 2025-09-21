@@ -30,3 +30,8 @@ def save_transactions():
 def holidays():
     return employee_management_service.holidays()
 
+
+@employee_management_app.route('/employeeManagement/paySlip', methods=['GET', 'POST'])
+def pay_slip():
+    return employee_management_service.pay_slip()
+

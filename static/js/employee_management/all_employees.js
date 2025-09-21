@@ -48,14 +48,14 @@ function updateModifyDeleteEmployeeFormInputValues() {
     const addressElement = document.getElementById("modify-address");
     const dateOfBirthElement = document.getElementById("modify-date_of_birth");
     const mobileNumberElement = document.getElementById("modify-mobile_number");
-    const monthlySalaryBaseElement = document.getElementById("modify-monthly-salary-base");
+    const yearlySalaryElement = document.getElementById("modify-yearly-salary");
 
     employeeData.forEach(element => {
         if (element.name === selectedText) {
             addressElement.value = element.address;
             dateOfBirthElement.value = formatDateToInput(element.date_of_birth);
             mobileNumberElement.value = element.mobile_number;
-            monthlySalaryBaseElement.value = element.monthly_salary_base;
+            yearlySalaryElement.value = element.yearly_salary;
         }
     });
 }

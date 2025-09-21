@@ -19,7 +19,7 @@ class Employee:
     address: str = None
     date_of_birth: date = None
     mobile_number: int = None
-    monthly_salary_base: float = None
+    yearly_salary: float = None
     type: str = UserType.EMPLOYEE
     active : bool = True
     created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())
@@ -48,6 +48,5 @@ class EmployeeAbsence:
     _id: ObjectId = None
     user_id: ObjectId = None
     absence_type: AbsenceType = None
-    start_date: str = None
-    end_date: str = None
+    absence_date: str = None
     created_at: str = field(default_factory=lambda : datetime.now(ZoneInfo("Asia/Kolkata")).isoformat())

@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask_pymongo import PyMongo
 from mappers import *
 from models import *
@@ -63,6 +64,15 @@ class RathiSweetHomeDatabase:
     def save_transaction(self, employee_transaction: EmployeeTransaction):
         return self.__transaction_collection.insert_one(EmployeeTransactionMapper.for_save_dict(employee_transaction))
 
+    def fetch_transactions_by_id_and_date(self, user_id: str, start_date: str, end_date: str):
+        user_id = ObjectId(user_id)
+        return tuple(self.__transaction_collection.find({
+            "user_id": user_id,
+            "created_at": {
+                "$gte": start_date,
+                "$lt": end_date
+            }}).sort("created_at", -1))
+
     # -----------------------Expenses table operations--------------------------------
 
     def fetch_expenses(self, created_date: str):
@@ -90,10 +100,19 @@ class RathiSweetHomeDatabase:
         check_employee_absence = self.__employee_absence_collection.find_one({
             "user_id": employee_absence_dict["user_id"],
             "absence_type": employee_absence_dict["absence_type"],
-            "start_date": employee_absence_dict["start_date"],
-            "end_date": employee_absence_dict["end_date"]
+            "absence_date": employee_absence_dict["absence_date"]
         })
         if check_employee_absence:
             return check_employee_absence
 
         return self.__employee_absence_collection.insert_one(employee_absence_dict)
+
+    def fetch_leaves_by_id_and_date(self, user_id: str, start_date: str, end_date: str):
+        user_id = ObjectId(user_id)
+        return tuple(self.__employee_absence_collection.find({
+            "user_id": user_id,
+            "absence_type": AbsenceType.LEAVE,
+            "absence_date": {
+                "$gte": start_date,
+                "$lt": end_date
+            }}).sort("created_at", -1))
