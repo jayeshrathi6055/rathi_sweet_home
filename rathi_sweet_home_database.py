@@ -1,9 +1,8 @@
-from datetime import timedelta
+import pymongo
 from flask_pymongo import PyMongo
+
 from mappers import *
 from models import *
-import calendar
-import pymongo
 
 class RathiSweetHomeDatabase:
 
@@ -106,6 +105,12 @@ class RathiSweetHomeDatabase:
             return check_employee_absence
 
         return self.__employee_absence_collection.insert_one(employee_absence_dict)
+
+    def fetch_upcoming_leaves(self, filters: dict = None):
+        if filters is None:
+            filters = {}
+        filters['absence_date'] = {"$gte": datetime.now().date().isoformat()}
+        return tuple(self.__employee_absence_collection.find(filters).sort("absence_date", 1))
 
     def fetch_leaves_by_id_and_date(self, user_id: str, start_date: str, end_date: str):
         user_id = ObjectId(user_id)

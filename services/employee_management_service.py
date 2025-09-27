@@ -2,6 +2,7 @@ import calendar
 from datetime import datetime, timedelta, date
 from decimal import Decimal, ROUND_HALF_UP
 from flask import current_app, redirect, render_template, request
+from bson.objectid import ObjectId
 
 from models import Employee, EmployeeAbsence, EmployeeTransaction
 
@@ -47,8 +48,10 @@ class EmployeeManagementService:
         return render_template("employee_management/save_transactions.html",
                                employees=db.fetch_active_employee())
 
-    def holidays(self):
+    def absence_tracker(self):
         db = self.__get_db()
+        employees = db.fetch_active_employee()
+
         if request.method == "POST":
             data = request.form.to_dict()
             start_date, end_date = self.__parse_dates(data.pop('start_date'), data.pop('end_date'))
@@ -57,7 +60,21 @@ class EmployeeManagementService:
                 employee_absence = EmployeeAbsence(**data)
                 db.save_employee_absence(employee_absence)
                 start_date += timedelta(days=1)
-        return render_template("employee_management/holidays.html", employees=db.fetch_active_employee())
+
+        filters = {}
+        if request.args.get('user_id'):
+            filters['user_id'] = ObjectId(request.args.get('user_id'))
+        leaves = db.fetch_upcoming_leaves(filters)
+
+        # Create a lookup dictionary for employee names
+        employee_lookup = {emp['_id']: emp['name'] for emp in employees}
+
+        # Add user_name to each leave using the lookup
+        for leave in leaves:
+            leave['user_name'] = employee_lookup.get(str(leave['user_id']))
+
+        return render_template("employee_management/absence_tracker.html",
+                               employees=employees, leaves=leaves)
 
     def pay_slip(self):
         db = self.__get_db()

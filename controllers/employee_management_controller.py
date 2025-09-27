@@ -26,9 +26,9 @@ def save_transactions():
     return employee_management_service.save_transactions()
 
 
-@employee_management_app.route('/employeeManagement/holidays', methods=['GET', 'POST'])
-def holidays():
-    return employee_management_service.holidays()
+@employee_management_app.route('/employeeManagement/absence', methods=['GET', 'POST'])
+def absence_tracker():
+    return employee_management_service.absence_tracker()
 
 
 @employee_management_app.route('/employeeManagement/paySlip', methods=['GET', 'POST'])

@@ -18,11 +18,11 @@
         <div class="mb-3">
             <label for="absence-type" class="form-label">Absence Type</label>
             <select class="form-select form-select-lg" aria-label="Large select example" name="absence_type" id="absence-type">
-                <option value="LEAVE" selected>LEAVE - will cut salary of employee</option>
-                <option value="HOLIDAY">HOLIDAY - will not cut salary of employee</option>
+                <option value="LEAVE" selected>LEAVE - will cut salary of the employee</option>
+                <option value="HOLIDAY">HOLIDAY - will not cut salary of the employee</option>
             </select>
         </div>
-        <div class="mb-3 d-flex gap-3">
+        <div class="mb-3 d-flex gap-3 flex-wrap">
             <div>
                 <label for="start-date" class="form-label">Start Date</label>
                 <input type="date" name="start_date" class="form-control" id="start-date" required>
@@ -34,6 +34,33 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <div class="mt-5 overflow-x-auto">
+        <h3 class="mb-3">View Absence</h3>
+        <div class="d-flex flex-wrap gap-3">
+            {% for employee in employees %}
+            <a href="?user_id={{ employee._id }}" class="btn btn-primary">For {{ employee.name }}</a>
+            {% endfor %}
+        </div>
+        <table class="table my-3" style="white-space: nowrap">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leave in leaves %}
+                <tr>
+                    <td>{{ leave.user_name }}</td>
+                    <td>{{ leave.absence_type }}</td>
+                    <td>{{ leave.absence_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-<script src="{{url_for('static',filename = 'js/employee_management/holidays.js')}}"></script>
+<script src="{{url_for('static',filename = 'js/employee_management/absence_tracker.js')}}"></script>
 {% endblock %}
