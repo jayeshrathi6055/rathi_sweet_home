@@ -3,14 +3,32 @@ from datetime import date, datetime
 from enum import Enum
 from bson import ObjectId
 from zoneinfo import ZoneInfo
+from flask_login import UserMixin
 
 class UserType(str, Enum):
     EMPLOYEE = 'EMPLOYEE'
     ADMIN = 'ADMIN'
-    
+
 class AbsenceType(str, Enum):
     HOLIDAY = 'HOLIDAY'
     LEAVE = 'LEAVE'
+
+@dataclass
+class UserRole(UserMixin):
+    user_email: str
+    user_password: str
+    user_type: UserType
+
+    def get_id(self):
+        return self.user_email
+
+    def to_dict(self):
+        return {
+            "_id": self.user_email,
+            "user_email": self.user_email,
+            "user_password": self.user_password,
+            "user_type": self.user_type.value
+        }
 
 @dataclass
 class Employee:

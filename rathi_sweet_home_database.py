@@ -1,3 +1,6 @@
+from dataclasses import asdict
+from typing import Optional
+
 import pymongo
 from flask_pymongo import PyMongo
 
@@ -10,6 +13,7 @@ class RathiSweetHomeDatabase:
         self.__mongo = PyMongo(flask_app, uri="mongodb://localhost:27017/rathi_sweet_home")
         self.__db = self.__mongo.db
         self.__user_collection = self.__db['users']
+        self.__user_role_collection = self.__db['user_roles']
         self.__transaction_collection = self.__db['transactions']
         self.__employee_absence_collection = self.__db['employee_absences']
         self.__expense_collection = self.__db['expenses']
@@ -36,6 +40,21 @@ class RathiSweetHomeDatabase:
 
     def delete_employee(self, user_id:str):
         return self.__user_collection.update_one({"_id": ObjectId(user_id)}, {"$set": {'active': False}})
+
+    # -----------------------User Roles table operations------------------------------------
+
+    def fetch_user_credentials(self, user_email:str) -> Optional[UserRole]:
+        user_role = self.__user_role_collection.find_one({"_id": user_email})
+        if user_role:
+            return UserRole(
+                user_email=user_role["user_email"],
+                user_password=user_role["user_password"],
+                user_type=UserType(user_role["user_type"])
+            )
+        return None
+
+    def save_user_credentials(self, user_credentials:UserRole):
+        return self.__user_role_collection.insert_one(user_credentials.to_dict())
 
     # -----------------------Transactions table operations--------------------------------
 
