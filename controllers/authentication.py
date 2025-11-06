@@ -1,7 +1,8 @@
-from flask import request, redirect, current_app, Blueprint
+from flask import request, redirect, current_app, Blueprint, render_template
 from flask_login import LoginManager, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import *
+from utils import set_alert
 
 auth_app = Blueprint('auth_app', __name__)
 
@@ -22,27 +23,17 @@ def login():
         if user_role and check_password_hash(user_role.user_password, password):
             print("Logged in")
             login_user(user_role)  # Starts the session
+            return redirect("/")
         else:
-            print("Login failed. Signing in...")
-            password_hash = generate_password_hash(password)
-            new_user_role = UserRole(email, password_hash, UserType.ADMIN)
-            __get_db().save_user_credentials(new_user_role)
-            login_user(new_user_role)  # Starts the session
+            print("Login failed...")
+            set_alert("warning", "Invalid credentials.", "Please try again.")
 
-        return redirect("/")
-
-    return '''
-        <form method="POST">
-            Email: <input type="text" name="email"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="submit" value="Login">
-        </form>
-    '''
+    return render_template("admin_login.html")
 
 @auth_app.route('/logout')
 def logout():
     logout_user()
-    return redirect("/")
+    return redirect("/login")
 
 
 def __get_db():
