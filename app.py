@@ -3,10 +3,11 @@ from flask_bootstrap import Bootstrap5
 from rathi_sweet_home_database import RathiSweetHomeDatabase
 from controllers import *
 from utils import *
+import os
 
 # Initialize app
 app = Flask(__name__)
-app.secret_key = 'rathiSweetHomeSecretKey'  # Needed for session cookies
+app.secret_key = os.getenv("APP_SECRET_KEY", "rathiSweetHomeSecretKey")  # Needed for session cookies
 
 # Initialize Bootstrap5 for UI
 bootstrap = Bootstrap5(app)

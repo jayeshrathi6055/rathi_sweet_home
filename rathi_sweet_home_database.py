@@ -1,5 +1,6 @@
 from dataclasses import asdict
 from typing import Optional
+import os
 
 import pymongo
 from flask_pymongo import PyMongo
@@ -10,7 +11,7 @@ from models import *
 class RathiSweetHomeDatabase:
 
     def __init__(self, flask_app):
-        self.__mongo = PyMongo(flask_app, uri="mongodb://localhost:27017/rathi_sweet_home")
+        self.__mongo = PyMongo(flask_app, uri=os.getenv("MONGO_URI", "mongodb://localhost:27017/rathi_sweet_home"))
         self.__db = self.__mongo.db
         self.__user_collection = self.__db['users']
         self.__user_role_collection = self.__db['user_roles']
