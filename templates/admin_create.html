@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rathi Sweet Home - Login Page</title>
+    <title>Rathi Sweet Home - Admin SignUp Page</title>
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_icon_font_css() }}
 </head>
 
 <body>
     <header>
-        <h1 class="text-center border border-1 border-dark-subtle p-3">Admin Login</h1>
+        <h1 class="text-center border border-1 border-dark-subtle p-3">Admin SignUp</h1>
     </header>
 
     {% if alert %}
@@ -33,7 +33,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <p class="my-3" style="font-size: 0.5rem;">Click here to <a href="/admin/create">SignUp</a></p>
+        <p class="my-3" style="font-size: 0.5rem;">Click here to <a href="/admin/login">Login</a></p>
     </div>
 
     {{ bootstrap.load_js() }}
