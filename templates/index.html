@@ -2,6 +2,7 @@
 {% block title %}Rathi Sweet Home - Expense Tracker{% endblock %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -10,16 +11,13 @@
         <div id="homeCarouselAutoPlaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100"
-                        style="height: 700px;" alt="...">
+                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100"
-                        style="height: 700px;" alt="...">
+                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100"
-                        style="height: 700px;" alt="...">
+                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#homeCarouselAutoPlaying"
@@ -39,90 +37,77 @@
         <article>
             <h2 class="text-center text-uppercase">Best Seller</h2>
             <p class="text-center text-capitalize" style="font-size: 0.5rem;">We bring out best in sweets</p>
-            <div class="container m-auto row row-cols-1 row-cols-md-4 g-4">
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+            <div class="container d-flex justify-content-center flex-wrap gap-3">
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text text-center">Kaju Katli</p>
-                        </div>
+                <div class="card">
+                    <img src="https://static.wixstatic.com/media/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg/v1/fill/w_762,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/721c0e_0baeb53ff39a4de2ac0b17f9db8bb7fa~mv2.jpeg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
             </div>
         </article>
     </section>
 
-    <section class="my-3">
-        <h2 class="text-center text-capitalize">Excellence of 42 years since 1980</h2>
-        <p class="text-center" style="font-size: 0.5rem;">20+ items for you to taste</p>
-        <div class="container m-auto">
-            <img src="{{url_for('static',filename = 'images/test.webp')}}" alt="Rabdi"
-                style="width: 100%; height: 400px;">
-        </div>
+    <section class="container-md mx-auto my-5">
+        <article class="row">
+            <div class="col d-flex flex-column justify-content-center align-items-center">
+                <h2 class="text-capitalize text-center">Excellence of 120+ years since 1905</h2>
+                <p class="text-center" style="font-size: 0.5rem;">20+ items for you to taste</p>
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <img src="{{url_for('static',filename = 'images/test.webp')}}" id="img_1905" alt="Rabdi">
+            </div>
+        </article>
     </section>
 </main>
 
@@ -142,6 +127,7 @@
             </div>
         </div>
     </div>
-    <p class="text-center mt-5" style="font-size: 0.5rem;">© 2025 by Rathi Sweet Home. Designed & Developed by Jayesh Rathi</p>
+    <p class="text-center mt-5" style="font-size: 0.5rem;">© 2025 by Rathi Sweet Home. Designed & Developed by Jayesh
+        Rathi</p>
 </footer>
 {% endblock %}
