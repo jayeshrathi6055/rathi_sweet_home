@@ -11,10 +11,10 @@
         <div id="homeCarouselAutoPlaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <video src="{{url_for('static',filename = 'videos/rathiSweetHome_homePage.mp4')}}" controls autoplay muted loop></video>
+                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
+                    <video src="{{url_for('static',filename = 'videos/rathiSweetHome_homePage.mp4')}}" controls autoplay muted loop></video>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#homeCarouselAutoPlaying"
@@ -69,11 +69,11 @@
         </article>
     </section>
 
-    <section class="container-md mx-auto my-5">
+    <section class="container-xl mx-auto my-5">
         <article class="row">
             <div class="col d-flex flex-column justify-content-center align-items-center">
                 <h2 class="text-capitalize text-center">Excellence of 120+ years since 1905</h2>
-                <p class="text-center" style="font-size: 0.5rem;">The makers of the famous Rabdi</p>
+                <p class="text-center text-break" style="font-size: 0.5rem;">The makers of the famous Rabdi</p>
             </div>
             <div class="col d-flex justify-content-center align-items-center">
                 <img src="{{url_for('static',filename = 'images/rabdi.webp')}}" id="img_1905" alt="Rabdi">
