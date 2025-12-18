@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Rathi Sweet Home - Expense Tracker{% endblock %}
+{% block title %}Shree Rathi Sweet Home - Home Page{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block navLinks %}
+<li class="nav-item">
+    <a class="nav-link text-primary-emphasis fw-medium" aria-current="page" href="#bestSeller">Specialities</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-primary-emphasis fw-medium" aria-current="page" href="#experience">Experience</a>
+</li>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +23,8 @@
                     <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <video src="{{url_for('static',filename = 'videos/rathiSweetHome_homePage.mp4')}}" controls autoplay muted loop></video>
+                    <video src="{{url_for('static',filename = 'videos/rathiSweetHome_homePage.mp4')}}" controls autoplay
+                        muted loop></video>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#homeCarouselAutoPlaying"
@@ -30,19 +40,21 @@
         </div>
     </section>
 
-    <section class="my-3">
+    <section class="my-3" id="bestSeller">
         <article>
             <h2 class="text-center text-uppercase">Best Seller</h2>
             <p class="text-center text-capitalize" style="font-size: 0.5rem;">We bring out best in sweets</p>
             <div class="container d-flex justify-content-center flex-wrap gap-3">
                 <div class="card">
-                    <img src="{{url_for('static',filename = 'images/kaju_katli.jpeg')}}" class="card-img-top" alt="kaju katli">
+                    <img src="{{url_for('static',filename = 'images/kaju_katli.jpeg')}}" class="card-img-top"
+                        alt="kaju katli">
                     <div class="card-body">
                         <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{url_for('static',filename = 'images/milk_cake.jpg')}}" class="card-img-top" alt="milk cake">
+                    <img src="{{url_for('static',filename = 'images/milk_cake.jpg')}}" class="card-img-top"
+                        alt="milk cake">
                     <div class="card-body">
                         <p class="card-text text-center">Milk Cake</p>
                     </div>
@@ -69,7 +81,7 @@
         </article>
     </section>
 
-    <section class="container-xl mx-auto my-5">
+    <section class="container-xl mx-auto my-5" id="experience">
         <article class="row">
             <div class="col d-flex flex-column justify-content-center align-items-center">
                 <h2 class="text-capitalize text-center">Excellence of 120+ years since 1905</h2>
@@ -95,10 +107,13 @@
             <div class="col">
                 <h4>Contact Us</h4>
                 <p>Mobile Number - 9829151621</p>
+                <p>Address - <a href="https://share.google/fmmLiU3amfMTVtJFt">Shree Rathi Sweets Home, Opposite Gvt.
+                        Hospital, Ahore, Jalore, Rajasthan, 307029</a></p>
             </div>
         </div>
     </div>
-    <p class="text-center mt-5" style="font-size: 0.5rem;">© 2025 by Rathi Sweet Home. Designed & Developed by Jayesh
+    <p class="text-center mt-5" style="font-size: 0.5rem;">© 2025 by Shree Rathi Sweets Home. Designed & Developed by
+        Jayesh
         Rathi</p>
 </footer>
 {% endblock %}
