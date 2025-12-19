@@ -20,7 +20,7 @@
         <div id="homeCarouselAutoPlaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="...">
+                    <img src="{{url_for('static',filename = 'images/test.webp')}}" class="d-block w-100" alt="Welcome to Shree Rathi Sweets Home" loading="eager" fetchpriority="high">
                 </div>
                 <div class="carousel-item">
                     <video src="{{url_for('static',filename = 'videos/rathiSweetHome_homePage.mp4')}}" controls autoplay
@@ -47,32 +47,32 @@
             <div class="container d-flex justify-content-center flex-wrap gap-3">
                 <div class="card">
                     <img src="{{url_for('static',filename = 'images/kaju_katli.jpeg')}}" class="card-img-top"
-                        alt="kaju katli">
+                        alt="kaju katli" fetchpriority="auto">
                     <div class="card-body">
                         <p class="card-text text-center">Kaju Katli</p>
                     </div>
                 </div>
                 <div class="card">
                     <img src="{{url_for('static',filename = 'images/milk_cake.jpg')}}" class="card-img-top"
-                        alt="milk cake">
+                        alt="milk cake" fetchpriority="auto">
                     <div class="card-body">
                         <p class="card-text text-center">Milk Cake</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{url_for('static',filename = 'images/rabdi.webp')}}" class="card-img-top" alt="Rabdi">
+                    <img src="{{url_for('static',filename = 'images/rabdi.webp')}}" class="card-img-top" alt="Rabdi" fetchpriority="auto">
                     <div class="card-body">
                         <p class="card-text text-center">Rabdi</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{url_for('static',filename = 'images/lasi.webp')}}" class="card-img-top" alt="Lasi">
+                    <img src="{{url_for('static',filename = 'images/lasi.webp')}}" class="card-img-top" alt="Lasi" fetchpriority="auto">
                     <div class="card-body">
                         <p class="card-text text-center">Lasi</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{url_for('static',filename = 'images/peda.webp')}}" class="card-img-top" alt="Peda">
+                    <img src="{{url_for('static',filename = 'images/peda.webp')}}" class="card-img-top" alt="Peda" fetchpriority="auto">
                     <div class="card-body">
                         <p class="card-text text-center">Peda</p>
                     </div>
@@ -88,7 +88,7 @@
                 <p class="text-center text-break" style="font-size: 0.5rem;">The makers of the famous Rabdi</p>
             </div>
             <div class="col d-flex justify-content-center align-items-center">
-                <img src="{{url_for('static',filename = 'images/rabdi.webp')}}" id="img_1905" alt="Rabdi">
+                <img src="{{url_for('static',filename = 'images/rabdi.webp')}}" id="img_1905" alt="Rabdi" loading="lazy" fetchpriority="low">
             </div>
         </article>
     </section>
